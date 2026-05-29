@@ -118,6 +118,44 @@
   .pb.qr:hover { border-color:#111; background:#111; color:#fff; }
   .pb.ql { border-color:#ddd; color:#666; font-size:11px; padding:6px 11px; }
   .pb.ql:hover { border-color:#555; background:#555; color:#fff; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    body { padding: 16px 12px 48px; gap: 16px; }
+    h1 { font-size: 17px; }
+
+    .viewer {
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 16px;
+      gap: 14px;
+    }
+
+    /* On mobile: START top, RESULT bottom, steps middle */
+    .endpoint { flex-direction: row; gap: 12px; align-items: center; width: 100%; }
+    .ep-box { flex-shrink: 0; }
+    .ep-label { font-size: 12px; }
+
+    /* Smaller big planes on mobile */
+    .viewer .ep-box { width: 90px !important; height: 90px !important; }
+    .viewer .ep-box canvas { width: 90px !important; height: 90px !important; }
+
+    .middle { width: 100%; }
+    .steps-row { gap: 0; }
+
+    /* Controls */
+    .controls { padding: 18px 16px; gap: 12px; }
+    .ctrl-row { gap: 8px; }
+    .deg-input-wrap input { font-size: 18px; width: 58px; }
+    .btn { font-size: 13px; padding: 10px 16px; }
+    .btn-reset { font-size: 11px; padding: 8px 12px; }
+    .pb { font-size: 11px; padding: 7px 10px; }
+    .pb.qr, .pb.ql { font-size: 11px; padding: 7px 9px; }
+
+    .mini-plane-wrap { width: 50px; height: 50px; }
+    .mini-plane-wrap canvas { width: 50px; height: 50px; }
+    .step-badge { font-size: 12px; padding: 5px 11px; }
+  }
 </style>
 </head>
 <body>
@@ -286,7 +324,7 @@ function render() {
   var viewer = document.getElementById('viewer');
   viewer.innerHTML = '';
   var angles = getAngles();
-  var BIG = 140;
+  var BIG = window.innerWidth <= 600 ? 90 : 140;
 
   viewer.appendChild(makeEndpoint(angles[0], 'START', 'start', BIG));
 
